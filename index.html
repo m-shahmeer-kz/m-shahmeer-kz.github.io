@@ -132,7 +132,7 @@ a:hover .arr,button:hover .arr{transform:translateX(4px)}
 .menu-open .burger span:last-child{top:21px;transform:rotate(-45deg)}
 .sheet{position:fixed;inset:0;z-index:49;padding:88px 14px 14px;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
 .menu-open .sheet{opacity:1;pointer-events:auto}
-.sheet-inner{max-width:1180px;margin:0 auto;border-radius:30px;padding:22px 26px 26px;display:grid;grid-template-columns:1.4fr 1fr;gap:20px;transform:translateY(-14px) scale(.98);transition:transform .6s var(--ease);
+.sheet-inner{max-height:calc(100vh - 102px);max-height:calc(100svh - 102px);overflow-y:auto;overscroll-behavior:contain;max-width:1180px;margin:0 auto;border-radius:30px;padding:22px 26px 26px;display:grid;grid-template-columns:1.4fr 1fr;gap:20px;transform:translateY(-14px) scale(.98);transition:transform .6s var(--ease);
   background:linear-gradient(180deg,rgba(36,36,38,.72),rgba(18,18,20,.66))}
 .menu-open .sheet-inner{transform:none}
 .sheet-big a{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);font-size:clamp(28px,3.4vw,44px);font-weight:600;letter-spacing:-.04em;transition:padding .5s var(--ease)}
@@ -144,7 +144,7 @@ a:hover .arr,button:hover .arr{transform:translateX(4px)}
 .sheet-quiet .btn{margin-top:auto;align-self:flex-start;color:#000}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:130px 0 110px}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:130px 0 110px}
 .hero-glow{position:absolute;right:6%;top:8%;width:52vw;height:52vw;max-width:780px;max-height:780px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.13),rgba(255,255,255,0) 62%);pointer-events:none}
 .hero-person{position:absolute;right:max(-2vw,calc(50% - 740px));bottom:0;height:min(84vh,900px);width:auto;max-width:none;z-index:1;pointer-events:none;
   filter:saturate(.75) contrast(1.04);will-change:transform;
@@ -256,7 +256,7 @@ section{position:relative}
   -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
 .creator-portrait::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 45% at 45% 32%,rgba(255,255,255,.13),transparent 70%)}
 .creator-portrait .badge{position:absolute;bottom:18px;right:18px;z-index:3}
-.stats{margin-top:8vh;display:grid;grid-template-columns:repeat(4,1fr);border-radius:var(--r-xl);overflow:hidden}
+.stats{margin-top:8vh;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-radius:var(--r-xl);overflow:hidden}
 .stat{padding:34px 30px;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
 .stat b{display:block;font-size:clamp(38px,4vw,58px);font-weight:600;letter-spacing:-.05em;line-height:1}
@@ -271,7 +271,9 @@ section{position:relative}
 .prow .hl{justify-self:end;text-align:right;padding-top:8px}
 .prow .hl b{display:block;font-size:26px;font-weight:600;letter-spacing:-.04em}
 .prow .hl span{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.accounts{margin-top:8vh;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.accounts{margin-top:8vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.acct>div{min-width:0}
+.acct p{overflow-wrap:anywhere}
 .acct{border-radius:var(--r-lg);padding:26px;display:flex;align-items:center;gap:18px;transition:transform .6s var(--ease)}
 .acct:hover{transform:translateY(-4px)}
 .av{width:84px;height:84px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#fff,#555);flex:none}
@@ -504,7 +506,7 @@ footer{border-top:1px solid var(--line);padding:9vh 0 120px}
   .hero::after{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,#000 80%)}
   .scroll-cue{display:none}
   .screen{grid-template-columns:1fr;min-height:0}.sb{display:none}.dash{grid-template-columns:1fr}
-  .grid6,.proof-g,.accounts{grid-template-columns:1fr}
+  .grid6,.proof-g,.accounts{grid-template-columns:minmax(0,1fr)}
   .cell{border-right:0!important;border-bottom:1px solid var(--line)!important;min-height:190px}
   .cell:last-child{border-bottom:0!important}
   .proof-g .stat{border-right:0;border-bottom:1px solid var(--line)!important}
@@ -535,6 +537,28 @@ footer{border-top:1px solid var(--line);padding:9vh 0 120px}
   .cm-facts div{border-right:0;border-bottom:1px solid var(--line)}
   .cm-sec{grid-template-columns:1fr;gap:12px;padding:26px 0}
   .lang{height:40px;padding:0 12px}
+}
+@media (max-width:400px){
+  .nav-in{padding-left:16px}
+  .nav-r{gap:5px}
+  .lang{padding:0 9px;letter-spacing:.04em;height:38px}
+  .nav .btn-sm{padding:9px 13px;font-size:13px}
+  .burger{width:40px;height:40px}
+  .burger span{left:12px;right:12px}
+  .burger span:first-child{top:16px}.burger span:last-child{top:22px}
+  .menu-open .burger span:first-child,.menu-open .burger span:last-child{top:19px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .stats .stat{border-right:0!important;border-bottom:1px solid var(--line)}
+  .stats .stat:last-child{border-bottom:0}
+  .acct{padding:18px;gap:14px}
+  .av{width:64px;height:64px}
+  .acct .go{width:40px;height:40px}
+  .pill{font-size:11px}
+}
+@media (max-height:560px) and (orientation:landscape){
+  .sheet{padding-top:76px}
+  .sheet-big a{font-size:24px;padding:6px 0}
+  .hero{padding:100px 0 60px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.ld{opacity:1;transform:none;filter:none}}
 </style>
@@ -571,7 +595,7 @@ footer{border-top:1px solid var(--line);padding:9vh 0 120px}
   </div>
 </header>
 <div class="sheet" id="sheet">
-  <div class="sheet-inner glass">
+  <div class="sheet-inner glass" data-lenis-prevent>
     <div class="sheet-big">
       <a href="#work">Work <small>01</small></a><a href="#creator">Content <small>02</small></a><a href="#services">Services <small>03</small></a><a href="#gym">Beyond work <small>04</small></a><a href="#about">About <small>05</small></a><a href="#certificates">Certificates <small>06</small></a><a href="#contact">Contact <small>07</small></a>
     </div>
